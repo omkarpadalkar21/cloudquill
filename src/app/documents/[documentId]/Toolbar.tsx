@@ -1,7 +1,10 @@
 "use client";
+import { type ColorResult, SketchPicker, CirclePicker } from "react-color";
+import { type Level } from "@tiptap/extension-heading";
 import {
   BoldIcon,
   ChevronDownIcon,
+  HighlighterIcon,
   ItalicIcon,
   ListTodoIcon,
   LucideIcon,
@@ -19,11 +22,63 @@ import { Separator } from "@radix-ui/react-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { isActive } from "@tiptap/core";
-import { Level } from "@tiptap/extension-heading";
+
+const HighlightColorButton = () => {
+  const { editor } = useEditorStore();
+
+  const value = editor?.getAttributes("highlight").color || "#000000";
+
+  const onChange = (color: ColorResult) => {
+    editor?.chain().focus().setHighlight({ color: color.hex }).run();
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={
+            "h-full min-w-0shrink-0 flex flex-col items-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          }
+        >
+          <HighlighterIcon className={"size-4"} />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={"p-2.5"}>
+        <CirclePicker color={value} onChange={onChange}/>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const TextColorButton = () => {
+  const { editor } = useEditorStore();
+
+  const value = editor?.getAttributes("textStyle").color || "#000000";
+
+  const onChange = (color: ColorResult) => {
+    editor?.chain().focus().setColor(color.hex).run();
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={
+            "h-6 min-w-7 shrink-0 flex flex-col items-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm gap-y-0"
+          }
+        >
+          <span className={"text-sm"}>A</span>
+          <div className={"h-0.5 w-full"} style={{ backgroundColor: value }} />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={"p-0 border"}>
+        <SketchPicker color={value} onChange={onChange} />
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const HeadingLevelButton = () => {
   const { editor } = useEditorStore();
@@ -38,7 +93,7 @@ const HeadingLevelButton = () => {
 
   const getCurrentHeading = () => {
     for (let level = 1; level <= 5; level++) {
-      if (editor?.isActive("heading", {level})) {
+      if (editor?.isActive("heading", { level })) {
         return `Heading ${level}`;
       }
     }
@@ -61,19 +116,24 @@ const HeadingLevelButton = () => {
       <DropdownMenuContent className={"p-1 flex flex-col gap-y-1"}>
         {headings.map(({ label, value, fontSize }) => (
           <button
-              onClick={()=>{
-                if (value === 0) {
-                  editor?.chain().focus().setParagraph().run();
-                } else {
-                  editor?.chain().focus().setHeading({ level: value as Level }).run();
-                }
-              }}
+            onClick={() => {
+              if (value === 0) {
+                editor?.chain().focus().setParagraph().run();
+              } else {
+                editor
+                  ?.chain()
+                  .focus()
+                  .setHeading({ level: value as Level })
+                  .run();
+              }
+            }}
             key={label}
             style={{ fontSize }}
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               (value === 0 && !editor?.isActive("heading")) ||
-                (value !== 0 && editor?.isActive("heading", { level: value as Level}))
+                (value !== 0 &&
+                  editor?.isActive("heading", { level: value as Level }))
                 ? "bg-neutral-200/80"
                 : "",
             )}
@@ -254,7 +314,7 @@ const Toolbar = () => {
   return (
     <div
       className={
-        "bg-[#F1F4F9] px-5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-3 overflow-x-auto"
+        "bg-[#F1F4F9] px-3 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-3 overflow-x-auto"
       }
     >
       {sections[0].map((item) => (
@@ -269,7 +329,7 @@ const Toolbar = () => {
         className="w-px h-6 bg-neutral-300 mx-0"
         style={{ display: "inline-block" }}
       />
-      <HeadingLevelButton/>
+      <HeadingLevelButton />
       <Separator
         className="w-px h-6 bg-neutral-300 mx-0"
         style={{ display: "inline-block" }}
@@ -282,8 +342,8 @@ const Toolbar = () => {
       {sections[1].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
-      {/*TODO: Text Color*/}
-      {/*TODO: Highlight Color*/}
+      <TextColorButton />
+      <HighlightColorButton />
       <Separator
         className="w-px h-6 bg-neutral-300 mx-0"
         style={{ display: "inline-block" }}

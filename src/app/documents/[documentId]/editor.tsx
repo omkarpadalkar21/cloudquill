@@ -1,5 +1,5 @@
 "use client";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
@@ -14,6 +14,8 @@ import { useEditorStore } from "@/store/use-editor-store";
 import { Underline } from "@tiptap/extension-underline";
 import { FontFamily } from "@tiptap/extension-font-family";
 import { TextStyle } from "@tiptap/extension-text-style";
+import { Color } from "@tiptap/extension-color";
+import { Highlight } from "@tiptap/extension-highlight";
 
 const Editor = () => {
   const { setEditor } = useEditorStore();
@@ -52,6 +54,8 @@ const Editor = () => {
     },
     extensions: [
       StarterKit,
+      Color,
+      Highlight.configure({ multicolor: true }),
       TaskList,
       TaskItem.configure({
         nested: true,
