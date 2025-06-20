@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react";
 
 const DocumentSettingsPage = () => {
-    return (
-        <div>Document Settings Page</div>
-    )
-}
-export default DocumentSettingsPage
+  return <div>Document Settings Page</div>;
+};
+export default DocumentSettingsPage;
