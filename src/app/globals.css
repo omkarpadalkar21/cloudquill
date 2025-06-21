@@ -194,6 +194,15 @@ pre {
     }
   }
 
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
   table {
     border-collapse: collapse;
     margin: 0;
