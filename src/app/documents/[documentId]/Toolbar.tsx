@@ -12,7 +12,7 @@ import {
   HighlighterIcon,
   ImageIcon,
   ItalicIcon,
-  Link2Icon,
+  Link2Icon, ListIcon, ListOrderedIcon,
   ListTodoIcon,
   LucideIcon,
   MessageSquareIcon,
@@ -47,7 +47,7 @@ import { lab } from "d3-color";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { isActive } from "@tiptap/core";
 
-const AlignButton = () => {
+const ListButton = () => {
   const { editor } = useEditorStore();
 
   const alignments = [
@@ -74,6 +74,54 @@ const AlignButton = () => {
   ];
 
   return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+              className={
+                "h-6 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm ml-[-8px]"
+              }
+          >
+            <AlignLeftIcon className={"size-4"} />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className={"p-1 flex flex-col gap-y-1"}>
+          {alignments.map(({ label, value, icon: Icon }) => (
+              <button
+                  key={value}
+                  onClick={() => editor?.chain().focus().setTextAlign(value).run()}
+                  className={cn(
+                      "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                      editor?.isActive({ textAlign: value }) && "bg-neutral-200/80",
+                  )}
+              >
+                <Icon className={"size-4"}/>
+                <span className={"text-sm"}>{label}</span>
+              </button>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+  );
+};
+
+const AlignButton = () => {
+  const { editor } = useEditorStore();
+
+  const lists = [
+    {
+      label: "Bullet List",
+      icon: ListIcon,
+      isActive: editor?.isActive("bulletList"),
+      onClick: () => editor?.chain().focus().toggleBulletList().run(),
+    },
+    {
+      label: "Ordered List",
+      icon: ListOrderedIcon,
+      isActive: editor?.isActive("orderedList"),
+      onClick: () => editor?.chain().focus().toggleOrderedList().run(),
+    }
+  ];
+
+  return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
@@ -81,17 +129,17 @@ const AlignButton = () => {
             "h-6 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm ml-[-8px]"
           }
         >
-          <AlignLeftIcon className={"size-4"} />
+          <ListIcon className={"size-4"} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className={"p-1 flex flex-col gap-y-1"}>
-        {alignments.map(({ label, value, icon: Icon }) => (
+        {lists.map(({ label,icon: Icon, onClick, isActive }) => (
           <button
-            key={value}
-            onClick={() => editor?.chain().focus().setTextAlign(value).run()}
+            key={label}
+            onClick={onClick}
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              editor?.isActive({ textAlign: value }) && "bg-neutral-200/80",
+              isActive && "bg-neutral-200/80",
             )}
           >
             <Icon className={"size-4"}/>
