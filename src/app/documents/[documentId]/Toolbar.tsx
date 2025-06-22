@@ -748,7 +748,7 @@ const Toolbar = () => {
       <LinkButton />
       <ImageButton />
       <AlignButton />
-      <LineHeightButton/>
+      <LineHeightButton />
       <ListButton />
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
