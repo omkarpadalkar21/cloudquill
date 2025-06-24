@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TemplatesGallery from "./templates-gallery";
 
 import Navbar from "@/app/(home)/navbar";
 export default function Home() {
@@ -8,14 +9,7 @@ export default function Home() {
         <Navbar />
       </div>
       <div className={"mt-16"}>
-        <p>
-          Click{" "}
-          <Link href={"documents/123"} className={"text-blue-600"}>
-            {" "}
-            here{" "}
-          </Link>{" "}
-          to go to document id
-        </p>
+        <TemplatesGallery/>
       </div>
     </div>
   );
