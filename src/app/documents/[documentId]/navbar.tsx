@@ -47,37 +47,39 @@ const Navbar = () => {
       .run();
   };
 
-  const onDownload = (blob: Blob, fileName: string)=>{
+  const onDownload = (blob: Blob, fileName: string) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = fileName;
     a.click();
-  }
+  };
 
-  const onSaveJSON = ()=>{
-    if(!editor) return;
+  const onSaveJSON = () => {
+    if (!editor) return;
 
     const content = editor.getJSON();
-    const blob = new Blob([JSON.stringify(content)], { type: "application/json" });
-    onDownload(blob, `document.json`) // TODO: Use document name
-  }
+    const blob = new Blob([JSON.stringify(content)], {
+      type: "application/json",
+    });
+    onDownload(blob, `document.json`); // TODO: Use document name
+  };
 
-  const onSaveHTML = ()=>{
-    if(!editor) return;
+  const onSaveHTML = () => {
+    if (!editor) return;
 
     const content = editor.getHTML();
     const blob = new Blob([content], { type: "text/html" });
-    onDownload(blob, `document.html`) // TODO: Use document name
-  }
+    onDownload(blob, `document.html`); // TODO: Use document name
+  };
 
-  const onSaveText = ()=>{
-    if(!editor) return;
+  const onSaveText = () => {
+    if (!editor) return;
 
     const content = editor.getText();
     const blob = new Blob([content], { type: "text/plain" });
-    onDownload(blob, `document.txt`) // TODO: Use document name
-  }
+    onDownload(blob, `document.txt`); // TODO: Use document name
+  };
 
   return (
     <nav className={"flex items-center justify-between"}>
@@ -119,7 +121,10 @@ const Navbar = () => {
                         <GlobeIcon className={"size-4"} />
                         HTML
                       </MenubarItem>
-                      <MenubarItem className="gap-2" onClick={()=>window.print()}>
+                      <MenubarItem
+                        className="gap-2"
+                        onClick={() => window.print()}
+                      >
                         <BsFilePdf className={"size-4"} />
                         PDF
                       </MenubarItem>
@@ -223,27 +228,37 @@ const Navbar = () => {
                       Text
                     </MenubarSubTrigger>
                     <MenubarSubContent>
-                      <MenubarItem onClick={()=>editor?.chain().toggleBold().run()}>
+                      <MenubarItem
+                        onClick={() => editor?.chain().toggleBold().run()}
+                      >
                         <BoldIcon className={"size-4 mr-2"} />
                         Bold <CommandShortcut>Ctrl/⌘ + b</CommandShortcut>
                       </MenubarItem>
-                      <MenubarItem onClick={()=>editor?.chain().toggleItalic().run()}>
+                      <MenubarItem
+                        onClick={() => editor?.chain().toggleItalic().run()}
+                      >
                         <ItalicIcon className={"size-4 mr-2"} />
                         Italic
                         <CommandShortcut>Ctrl/⌘ + i</CommandShortcut>
                       </MenubarItem>
-                      <MenubarItem onClick={()=>editor?.chain().toggleUnderline().run()}>
+                      <MenubarItem
+                        onClick={() => editor?.chain().toggleUnderline().run()}
+                      >
                         <UnderlineIcon className={"size-4 mr-2"} />
                         Underline <CommandShortcut>Ctrl/⌘ + u</CommandShortcut>
                       </MenubarItem>
-                      <MenubarItem onClick={()=>editor?.chain().toggleStrike().run()}>
+                      <MenubarItem
+                        onClick={() => editor?.chain().toggleStrike().run()}
+                      >
                         <StrikethroughIcon className={"size-4 mr-2"} />
                         <span>Strikethrough&nbsp;&nbsp;</span>{" "}
                         <CommandShortcut>Ctrl/⌘ + s</CommandShortcut>
                       </MenubarItem>
                     </MenubarSubContent>
                   </MenubarSub>
-                  <MenubarItem onClick={()=>editor?.chain().unsetAllMarks().run()}>
+                  <MenubarItem
+                    onClick={() => editor?.chain().unsetAllMarks().run()}
+                  >
                     <RemoveFormattingIcon className={"size-4 mr-2"} />
                     Clear Formatting
                   </MenubarItem>
