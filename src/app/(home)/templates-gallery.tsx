@@ -15,7 +15,7 @@ const TemplatesGallery = () => {
   return (
     <div className="bg-[#F1F3F4]">
       <div className="flex max-w-screen mx-auto px-16 py-6 flex-col gap-y-4">
-        <h3 className="font-medium">Start a new document</h3>
+        <h3 className="font-medium">Start a new documennt</h3>
         <Carousel>
           <CarouselContent className="-ml-4">
             {templates.map((template) => (
