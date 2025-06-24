@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SearchInput from "@/app/(home)/search-input";
-
+import { UserButton } from "@clerk/clerk-react";
 const Navbar = () => {
   return (
     <div className={"flex items-center justify-between h-full w-full"}>
@@ -17,7 +17,7 @@ const Navbar = () => {
         </Link>
       </div>
       <SearchInput />
-      <div />
+      <UserButton />
     </div>
   );
 };
