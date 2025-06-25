@@ -5,10 +5,12 @@ import TemplatesGallery from "./templates-gallery";
 import DocumentsTable from "./documents-table";
 import Navbar from "@/app/(home)/navbar";
 import { api } from "../../../convex/_generated/api";
+import { useSearchParam } from "@/hooks/use-search-params";
 export default function Home() {
+  const [search] = useSearchParam();
   const { results, status, loadMore } = usePaginatedQuery(
     api.documents.get,
-    { paginationOpts: {} },
+    { search },
     { initialNumItems: 5 }
   );
 
