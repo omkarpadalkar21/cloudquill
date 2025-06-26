@@ -14,6 +14,7 @@ import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface RenameDialogProps {
   documentId: Id<"documents">;
@@ -34,9 +35,14 @@ const RenameDialog = ({
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdating(true);
+
     update({ id: documentId, title: title.trim() || "Untitled" })
-      .then(() => setOpen(false))
-      .finally(() => {
+      .catch(() => toast.error("Something went wrong!"))
+      .then(() => {
+        toast.success("Document renamed.");
+        setOpen(false);
+      })
+      .finally(() => { 
         setIsUpdating(false);
       });
   };
