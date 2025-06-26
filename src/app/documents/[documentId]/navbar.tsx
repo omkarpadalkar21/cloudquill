@@ -35,7 +35,8 @@ import {
 import { BsFilePdf } from "react-icons/bs";
 import { CommandShortcut } from "@/components/ui/command";
 import { useEditorStore } from "@/store/use-editor-store";
-
+import { OrganizationSwitcher } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 const Navbar = () => {
   const { editor } = useEditorStore();
 
@@ -267,6 +268,15 @@ const Navbar = () => {
             </Menubar>
           </div>
         </div>
+      </div>
+      <div className="flex gap-3 items-center pl-6">
+        <OrganizationSwitcher
+          afterCreateOrganizationUrl={"/"}
+          afterLeaveOrganizationUrl="/"
+          afterSelectOrganizationUrl={"/"}
+          afterSelectPersonalUrl={"/"}
+        />
+        <UserButton />
       </div>
     </nav>
   );
