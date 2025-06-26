@@ -21,9 +21,12 @@ import { useEditorStore } from "@/store/use-editor-store";
 import { FontSizeExtension } from "@/extensions/font-size";
 import { LineHeightExtension } from "@/extensions/line-height";
 import Ruler from "@/app/documents/[documentId]/ruler";
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
+import { Threads } from "./threads";
 
 const Editor = () => {
   const { setEditor } = useEditorStore();
+  const liveBlocks = useLiveblocksExtension();
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -59,7 +62,10 @@ const Editor = () => {
       },
     },
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        history: false,
+      }),
+      liveBlocks,
       FontSizeExtension,
       LineHeightExtension,
       Link.configure({
@@ -101,6 +107,7 @@ const Editor = () => {
         }
       >
         <EditorContent editor={editor} />
+        <Threads editor={editor} />
       </div>
     </div>
   );
