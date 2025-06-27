@@ -83,7 +83,6 @@ const LineHeightButton = () => {
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               editor?.getAttributes("paragraph").lineHeight === value &&
                 "bg-neutral-200/80"
-                "bg-neutral-200/80"
             )}
           >
             <span className={"text-sm"}>{label}</span>
