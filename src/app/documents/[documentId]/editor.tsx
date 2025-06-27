@@ -17,17 +17,16 @@ import { Highlight } from "@tiptap/extension-highlight";
 import { Link } from "@tiptap/extension-link";
 import { TextAlign } from "@tiptap/extension-text-align";
 
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { useEditorStore } from "@/store/use-editor-store";
 import { FontSizeExtension } from "@/extensions/font-size";
 import { LineHeightExtension } from "@/extensions/line-height";
 import Ruler from "@/app/documents/[documentId]/ruler";
-import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { Threads } from "./threads";
 
 const Editor = () => {
   const { setEditor } = useEditorStore();
-  const liveBlocks = useLiveblocksExtension();
-
+  const liveblocks = useLiveblocksExtension();
   const editor = useEditor({
     immediatelyRender: false,
     onCreate({ editor }) {
@@ -65,7 +64,7 @@ const Editor = () => {
       StarterKit.configure({
         history: false,
       }),
-      liveBlocks,
+      liveblocks,
       FontSizeExtension,
       LineHeightExtension,
       Link.configure({
