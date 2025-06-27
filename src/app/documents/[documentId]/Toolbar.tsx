@@ -691,6 +691,7 @@ const Toolbar = () => {
       {
         label: "Comment",
         icon: MessageSquareIcon,
+
         isActive: editor?.isActive("liveblocksCommentMark"), //TODO: Enable this functionality
         onClick: () => editor?.chain().focus().addPendingComment().run(),
       },

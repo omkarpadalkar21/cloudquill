@@ -1,14 +1,26 @@
 # CloudQuill
 
+<!-- IMAGE: Add a hero screenshot of the CloudQuill editor UI here. Suggested: Show collaborative editing in action with multiple cursors and a modern interface. -->
+
 CloudQuill is a collaborative, cloud-based document editor built with [Next.js](https://nextjs.org). It features real-time editing, rich text formatting, and seamless document management.
 
 ## Features
 
-- Real-time collaborative editing
-- Rich text formatting (fonts, colors, highlights, etc.)
-- Image upload and URL pasting
-- Document organization and sharing
-- Responsive and modern UI
+- **Real-time Collaborative Editing**: Multiple users can edit the same document simultaneously, with changes reflected instantly for all collaborators.
+- **Rich Text Formatting**: Supports a wide range of formatting options including bold, italics, underline, font size, font family, text color, highlights, bullet and numbered lists, blockquotes, and more.
+- **Image Upload & Embedding**: Easily upload images or paste image URLs directly into your documents.
+- **Document Organization**: Create, rename, and delete documents. Organize your work with folders or tags (if implemented).
+- **Sharing & Permissions**: Share documents with others and manage access permissions (view, edit, etc.).
+- **Modern, Responsive UI**: Clean and intuitive interface that works seamlessly on desktop and mobile devices.
+- **Template Gallery**: Start quickly with a variety of document templates (e.g., resumes, cover letters, proposals).
+- **Version History**: Track changes and revert to previous versions of your documents (if implemented).
+- **Autosave**: All changes are saved automatically in the cloud, so you never lose your work.
+- **Extensible Editor**: Built with plugin support for adding custom formatting options and features.
+- **Accessibility**: Designed with accessibility best practices for an inclusive editing experience.
+
+<!-- IMAGE: Add a screenshot of the template gallery here. Suggested: Show the selection of different document templates available to users. -->
+
+<!-- IMAGE: Add a screenshot of the document sharing or permissions dialog. Suggested: Show how users can invite collaborators and set permissions. -->
 
 ## Getting Started
 
