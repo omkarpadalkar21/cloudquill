@@ -1,7 +1,9 @@
 import Editor from "@/app/documents/[documentId]/editor";
 import Toolbar from "@/app/documents/[documentId]/Toolbar";
 import Navbar from "@/app/documents/[documentId]/navbar";
-import { Room } from "@/app/Room";
+
+import { Room } from "./room";
+
 
 interface DocumentIdPageProps {
   params: Promise<{ documentId: string }>;
